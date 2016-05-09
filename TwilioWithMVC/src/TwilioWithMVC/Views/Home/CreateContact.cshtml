@@ -25,7 +25,7 @@
             dataType: 'json',
             data: $(this).serialize(),
             success: function (result) {
-                var resultMessage = '<li><ul><li>Name: '+result.Name+'</li><li>Phone NUmber: '+result.PhoneNumber+'</li></ul></li>';
+                var resultMessage = '<li><ul><li>Name: '+result.Name+'</li><li>Phone Number: '+result.PhoneNumber+'</li></ul></li>';
                 $('#newContact').append(resultMessage);
             }
         });
