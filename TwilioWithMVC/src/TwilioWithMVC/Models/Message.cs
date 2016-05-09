@@ -30,7 +30,7 @@ namespace TwilioWithMVC.Models
         public void Send()
         {
             var client = new RestClient("https://api.twilio.com/2010-04-01");
-            var request = new RestRequest("Accounts/EnvironmentVariables.AccountSid/Messages", Method.POST);
+            var request = new RestRequest("Accounts/" + EnvironmentVariables.AccountSid + "/Messages", Method.POST);
             request.AddParameter("To", To);
             request.AddParameter("From", From);
             request.AddParameter("Body", Body);
