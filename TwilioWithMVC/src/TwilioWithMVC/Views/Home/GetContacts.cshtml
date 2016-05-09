@@ -1,0 +1,15 @@
+﻿@model IEnumerable<TwilioWithMVC.Models.Contact>
+
+<h2>All Contacts</h2>
+<hr />
+<ol id="newContact">
+    @foreach (var contact in Model)
+    {
+        <li>
+            <ul>
+                <li>Name: @Html.DisplayFor(modelItem => contact.Name)</li>
+                <li>Phone Number: @Html.DisplayFor(modelItem => contact.PhoneNumber)</li>
+            </ul>
+        </li>
+    }
+</ol>

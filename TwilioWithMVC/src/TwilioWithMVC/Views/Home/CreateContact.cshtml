@@ -1,0 +1,33 @@
+﻿@model TwilioWithMVC.Models.Contact
+
+<div class="form">
+    @using (Html.BeginForm("Contacts", "Home", FormMethod.Post, new { @class = "new-contact" }))
+    {
+        <div class="row">
+            <div class="col-sm-3">@Html.LabelFor(model => model.Name) @Html.TextBoxFor(model => model.Name) </div>
+            <div class="col-sm-3">
+                @Html.LabelFor(model => model.PhoneNumber) @Html.TextBoxFor(model => model.PhoneNumber)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <input class="btn btn-warning" type="submit" value="Add new Contact" />
+            </div>
+        </div>
+    }
+</div>
+<script>
+    $('.new-contact').submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: '@Url.Action("CreateContact")',
+            type: 'POST',
+            dataType: 'json',
+            data: $(this).serialize(),
+            success: function (result) {
+                var resultMessage = '<li><ul><li>Name: '+result.Name+'</li><li>Phone NUmber: '+result.PhoneNumber+'</li></ul></li>';
+                $('#newContact').append(resultMessage);
+            }
+        });
+    });
+</script>

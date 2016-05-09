@@ -1,5 +1,57 @@
-﻿<h2>Awesome Text Messaging App!</h2>
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Security.Claims
+<h2>Awesome Text Messaging App!</h2>
 <hr />
-@Html.ActionLink("View all Messages", "GetMessages")
-<br />
-@Html.ActionLink("Send a new message", "SendMessage")
+
+@if (User.IsSignedIn())
+{
+    <h2>Add a Contact</h2>
+    <div id="createContact"></div>
+    <h2>Send a Message</h2>
+    <div id="createMessage"></div>
+    <hr />
+    <h2>Contacts</h2>
+    <div id="listContacts"></div>
+    <h2>Messages</h2>
+    <div id="listMessages"></div>
+    <script>
+    $(window).load(function () {
+        $.ajax({
+            type: 'GET',
+            dataType: 'html',
+            url: '@Url.Action("GetContacts","Home")',
+            success: function (result) {
+                $('#listContacts').html(result);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            dataType: 'html',
+            url: '@Url.Action("GetMessages","Home")',
+            success: function (result) {
+                $('#listMessages').html(result);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            dataType: 'html',
+            url: '@Url.Action("CreateContact","Home")',
+            success: function (result) {
+                $('#createContact').html(result);
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            dataType: 'html',
+            url: '@Url.Action("CreateMessage","Home")',
+            success: function (result) {
+                console.log(result);
+                $('#createMessage').html(result);
+            }
+        });
+    });
+    </script>
+}
